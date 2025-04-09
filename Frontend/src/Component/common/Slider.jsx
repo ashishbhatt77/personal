@@ -3,25 +3,26 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 
 function Slider() {
   const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSliders = async () => {
       try {
         const response = await fetch("https://ecommerce-backend-9lah.onrender.com/api/admin/sliders");
         const data = await response.json();
-        console.log("API Response:", data);
 
         if (response.ok && data.success && Array.isArray(data.data)) {
           const validImages = data.data
             .map((slider) => slider.imageUrl)
             .filter((url) => url && url.startsWith("http"));
-
           setImages(validImages);
         } else {
           console.error("Invalid API Response:", data);
         }
       } catch (error) {
         console.error("Error fetching sliders:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -30,7 +31,12 @@ function Slider() {
 
   return (
     <section id="slider">
-      <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
+      <div
+        id="carouselExampleIndicators"
+        className="carousel slide"
+        data-bs-ride="carousel"
+      >
+        {/* Indicators */}
         <div className="carousel-indicators">
           {images.map((_, index) => (
             <button
@@ -45,11 +51,38 @@ function Slider() {
           ))}
         </div>
 
+        {/* Carousel Inner */}
         <div className="carousel-inner">
-          {images.length > 0 ? (
+          {loading ? (
+            <div className="carousel-item active">
+              <div
+                style={{
+                  height: "500px",
+                  backgroundColor: "#f8f9fa",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  color: "#888",
+                }}
+              >
+                Loading...
+              </div>
+            </div>
+          ) : images.length > 0 ? (
             images.map((img, index) => (
-              <div key={index} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                <img src={img} className="d-block w-100" alt={`Slide ${index + 1}`} />
+              <div
+                key={index}
+                className={`carousel-item ${index === 0 ? "active" : ""}`}
+              >
+                <img
+                  src={img}
+                  className="d-block w-100"
+                  alt={`Slide ${index + 1}`}
+                  style={{ height: "500px", objectFit: "cover" }}
+                  loading="lazy"
+                />
               </div>
             ))
           ) : (
@@ -57,13 +90,13 @@ function Slider() {
               <div
                 style={{
                   height: "500px",
-                  backgroundColor: "#ddd",
+                  backgroundColor: "#eee",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   fontSize: "20px",
                   fontWeight: "bold",
-                  color: "#666",
+                  color: "#999",
                 }}
               >
                 No Image Available
@@ -72,24 +105,29 @@ function Slider() {
           )}
         </div>
 
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="prev"
-        >
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide="next"
-        >
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
+        {/* Controls */}
+        {images.length > 1 && (
+          <>
+            <button
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev"
+            >
+              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button
+              className="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next"
+            >
+              <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </>
+        )}
       </div>
     </section>
   );

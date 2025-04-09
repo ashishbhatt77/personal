@@ -10,27 +10,37 @@ const swaggerDocs = require("./swaggerConfig");
 
 const app = express();
 
+// Security headers
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
+
+// Request limits & protection
 app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
 app.use(mongoSanitize());
 
-swaggerDocs(app);
+// Swagger Docs (only enable in development or staging)
+if (process.env.NODE_ENV !== "production") {
+  swaggerDocs(app);
+}
 
-// const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
-// app.use(limiter);
+// CORS
+const allowedOrigins = process.env.CORS_ORIGIN
+  ? process.env.CORS_ORIGIN.split(",")
+  : ["http://localhost:3000"];
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN?.split(",") || ["http://localhost:3000"],
+    origin: allowedOrigins,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "Set-Cookie"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
+// Connect Database
 connectDatabase();
 
+// Routes
 const routes = {
   auth: require("./routes/authRoutes"),
   products: require("./routes/productRoutes"),
@@ -47,18 +57,27 @@ Object.entries(routes).forEach(([key, route]) => {
   app.use(`/api/${key}`, route);
 });
 
-app.get("/", (req, res) => res.send("Secure E-Commerce API Running..."));
+// Root
+app.get("/", (req, res) => {
+  res.send("Secure E-Commerce API Running...");
+});
 
+// 404 Handler
 app.use((req, res, next) => {
-  const error = new Error(`Route not found: ${req.originalUrl}`);
-  error.status = 404;
-  next(error);
+  res.status(404).json({ message: `Route not found: ${req.originalUrl}` });
 });
 
+// Global Error Handler
 app.use((err, req, res, next) => {
-  console.error(`Error: ${err.message}`);
-  res.status(err.status || 500).json({ message: err.message || "Internal Server Error" });
+  console.error("Error:", err.message);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || "Internal Server Error",
+  });
 });
 
+// Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () =>
+  console.log(`🚀 Server running on http://localhost:${PORT}`)
+);
