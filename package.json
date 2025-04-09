@@ -2,7 +2,7 @@
     "name": "MultiVendorEcommerce",
     "version": "1.0.0",
     "scripts": {
-        "start": "node Backend/server.js",
+        "start": "node Backend/src/server.js",
         "build": "cd Frontend && npm install && npm run build"
     },
     "engines": {
