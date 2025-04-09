@@ -22,7 +22,7 @@ const BusinessManage = ({ children }) => {
   const toggleStatus = (id, currentStatus) => {
     const newStatus = currentStatus === "Blocked" ? "Active" : "Blocked";
 
-    axios.patch(`http://localhost:5000/api/sellers/${id}`, { status: newStatus })
+    axios.patch(`https://ecommerce-backend-9lah.onrender.com/api/sellers/${id}`, { status: newStatus })
       .then(() => {
         setSellers(sellers.map(seller =>
           seller.id === id ? { ...seller, status: newStatus } : seller

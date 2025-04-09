@@ -21,7 +21,7 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch("https://ecommerce-backend-9lah.onrender.com/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

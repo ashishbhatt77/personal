@@ -40,7 +40,7 @@ const ASliderTable = () => {
     if (!window.confirm("Are you sure you want to delete this slide?")) return;
     try {
       const token = localStorage.getItem("token"); // ✅ Get token
-      const response = await fetch(`/api/admin/sliders/${id}`, {
+      const response = await fetch(`https://ecommerce-backend-9lah.onrender.com/api/admin/sliders/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`, // ✅ Include token

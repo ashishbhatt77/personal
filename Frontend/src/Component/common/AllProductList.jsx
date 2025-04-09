@@ -6,7 +6,7 @@ import axios from "axios";
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/products/active")
+    axios.get("https://ecommerce-backend-9lah.onrender.com/api/products/active")
       .then(res => setProducts(res.data))
       .catch(err => console.error("Error fetching products", err));
   }, []);

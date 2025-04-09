@@ -34,7 +34,7 @@ const AdminSlider = () => {
     formData.append("description", description);
 
     try {
-      const response = await fetch("/api/admin/sliders", {
+      const response = await fetch("https://ecommerce-backend-9lah.onrender.com/api/admin/sliders", {
         method: "POST",
         body: formData,
       });

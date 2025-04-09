@@ -20,7 +20,7 @@ function ProductDetails() {
   const fetchProduct = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`/api/products/${productId}`, {
+      const res = await axios.get(`https://ecommerce-backend-9lah.onrender.com/api/products/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

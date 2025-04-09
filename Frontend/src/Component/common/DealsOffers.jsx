@@ -20,7 +20,7 @@ const DealsOffers = () => {
     }
 
     try {
-      const response = await axios.get("/api/products/advertised", {
+      const response = await axios.get("https://ecommerce-backend-9lah.onrender.com/api/products/advertised", {
         headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });

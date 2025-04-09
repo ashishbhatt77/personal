@@ -18,7 +18,7 @@ const ForgotResetPassword = () => {
     }
     try {
       setLoading(true);
-      const response = await fetch("/api/auth/forgot-password", {
+      const response = await fetch("https://ecommerce-backend-9lah.onrender.com/api/auth/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -50,7 +50,7 @@ const ForgotResetPassword = () => {
 
     try {
       setLoading(true);
-      const response = await fetch("/api/auth/reset-password", {
+      const response = await fetch("https://ecommerce-backend-9lah.onrender.com/api/auth/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp, newPassword, confirmPassword }),

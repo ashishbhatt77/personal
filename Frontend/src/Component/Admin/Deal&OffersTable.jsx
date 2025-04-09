@@ -12,7 +12,7 @@ const DealOffersTable = () => {
     // Fetch deals & offers from backend
     const fetchDeals = async () => {
       try {
-        const response = await fetch("/api/get-deals"); // API endpoint
+        const response = await fetch("https://ecommerce-backend-9lah.onrender.com/api/get-deals"); // API endpoint
         const data = await response.json();
         setDeals(data);
         setLoading(false);

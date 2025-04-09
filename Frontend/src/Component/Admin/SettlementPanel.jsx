@@ -15,7 +15,7 @@ function SettlementPanel() {
     setError("");
 
     try {
-      const res = await axios.get("/api/seller-payouts");
+      const res = await axios.get("https://ecommerce-backend-9lah.onrender.com/api/seller-payouts");
       console.log("API Response:", res.data); // Debugging
 
       if (Array.isArray(res.data)) {
