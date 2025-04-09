@@ -12,7 +12,7 @@ const DealOffersTable = () => {
     // Fetch deals & offers from backend
     const fetchDeals = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/get-deals"); // API endpoint
+        const response = await fetch("/api/get-deals"); // API endpoint
         const data = await response.json();
         setDeals(data);
         setLoading(false);

@@ -30,7 +30,7 @@ const EditProducts = () => {
     const fetchProduct = async () => {
       try {
         const token = localStorage.getItem("token");
-        const { data } = await axios.get(`http://localhost:3000/api/products/${productId}`, {
+        const { data } = await axios.get(`/api/products/${productId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

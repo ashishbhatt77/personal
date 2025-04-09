@@ -9,7 +9,7 @@ const UserManage = () => {
 
   // Fetch users from API using axios
   useEffect(() => {
-    axios.get("http://localhost:5000/api/users")
+    axios.get("/api/users")
       .then((response) => {
         setUsers(response.data); // Correctly accessing response data
       })

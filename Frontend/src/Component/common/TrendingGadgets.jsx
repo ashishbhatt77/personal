@@ -12,7 +12,7 @@ const TrendingGadgets = () => {
 
   const fetchTrendingGadgets = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/products/active");
+      const response = await axios.get("/api/products/active");
       setGadgets(response.data.products || []);
     } catch (error) {
       console.error("Error fetching trending gadgets:", error.response?.data?.message || error.message);

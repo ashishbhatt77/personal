@@ -12,7 +12,7 @@ const GadgetsTable = () => {
     // Fetch gadgets from backend
     const fetchGadgets = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/get-gadgets"); // API endpoint
+        const response = await fetch("/api/get-gadgets"); // API endpoint
         const data = await response.json();
         setGadgets(data);
         setLoading(false);

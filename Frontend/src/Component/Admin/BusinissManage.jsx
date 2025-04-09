@@ -9,7 +9,7 @@ const BusinessManage = ({ children }) => {
 
   // ✅ API से Business Sellers डेटा लाना
   useEffect(() => {
-    axios.get("http://localhost:5000/api/sellers")
+    axios.get("/api/sellers")
       .then((response) => {
         setSellers(response.data);
       })

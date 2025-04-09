@@ -20,7 +20,7 @@ const DealsOffers = () => {
     }
 
     try {
-      const response = await axios.get("http://localhost:5000/api/products/advertised", {
+      const response = await axios.get("/api/products/advertised", {
         headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       });

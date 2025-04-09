@@ -9,7 +9,7 @@ const Order = () => {
   });
 
   useEffect(() => {
-    fetch("https://api.example.com/order") // Replace with actual API endpoint
+    fetch("/order") // Replace with actual API endpoint
       .then(response => response.json())
       .then(data => setOrder(data))
       .catch(error => console.error("Error fetching order data:", error));

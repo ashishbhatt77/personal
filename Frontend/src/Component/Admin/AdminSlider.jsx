@@ -34,7 +34,7 @@ const AdminSlider = () => {
     formData.append("description", description);
 
     try {
-      const response = await fetch("http://localhost:5000/api/admin/sliders", {
+      const response = await fetch("/api/admin/sliders", {
         method: "POST",
         body: formData,
       });

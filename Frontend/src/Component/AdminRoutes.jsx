@@ -7,7 +7,6 @@ import ReviewForm from "./Admin/Reviewform";
 import AdminSlider from "./Admin/AdminSlider";
 import DealOffersTable from "./Admin/Deal&OffersTable";
 import GadgetsTable from "./Admin/GadgetsTable";
-import TestimonialTable from "./Admin/TestinominlTable";
 import UserManage from "./Admin/UserManage";
 import BusinessManage from "./Admin/BusinissManage";
 import PaymentSettlement from "./Admin/PaymentSettlement";
@@ -28,7 +27,6 @@ const AdminRoutes = () => {
       <Route path="/SliderTable" element={<ASliderTable />} />
       <Route path="/DealofferTable" element={<DealOffersTable />} />
       <Route path="/GadgetsTable" element={<GadgetsTable />} />
-      <Route path="/TestinominalTable" element={<TestimonialTable />} />
       <Route path="/UserManage" element={<UserManage />} />
       <Route path="/BusinissManage" element={<BusinessManage />} />
       <Route path="/PaymentSettlemet" element={<PaymentSettlement />} />

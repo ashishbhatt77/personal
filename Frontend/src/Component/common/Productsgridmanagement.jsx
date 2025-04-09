@@ -43,7 +43,7 @@ const Productsgridmanagement = () => {
     try {
       const encodedCategory = encodeURIComponent(category);
       const response = await axios.get(
-        `http://localhost:5000/api/products/category/${encodedCategory}`
+        `/api/products/category/${encodedCategory}`
       );
 
       const formattedSlug =

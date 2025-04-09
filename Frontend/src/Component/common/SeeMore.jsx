@@ -24,7 +24,7 @@ const SeeMore = () => {
     setLoading(true);
     try {
       const encodedCategory = encodeURIComponent(category);
-      const response = await axios.get(`http://localhost:5000/api/products/category/${encodedCategory}`);
+      const response = await axios.get(`/api/products/category/${encodedCategory}`);
 
       setProducts(response.data.products || []);
     } catch (error) {
